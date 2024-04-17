@@ -3,7 +3,7 @@ import torch.optim as optim
 import torch.nn as nn
 import time
 
-from Vocabulary.vocabulary import Vocab
+from vocabulary.vocabulary import Vocab
 from model.model_RNN import RNN
 from dataset.data_loader.data_loader import data_loader
 from dataset.IMDB.IMDBDataset import IMDBDataset

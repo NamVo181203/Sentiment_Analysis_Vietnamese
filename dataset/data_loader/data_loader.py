@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import random_split
 from torch.utils.data import DataLoader
 
-from Vocabulary.vocabulary import Vocab
+from vocabulary.vocabulary import Vocab
 from dataset.IMDB.IMDBDataset import IMDBDataset
 
 

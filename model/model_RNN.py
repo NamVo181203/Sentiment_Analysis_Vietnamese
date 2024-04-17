@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from Vocabulary.vocabulary import Vocab
+from vocabulary.vocabulary import Vocab
 
 
 class RNN(nn.Module):

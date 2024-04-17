@@ -3,7 +3,7 @@ from tqdm import tqdm
 from underthesea import word_tokenize
 
 
-# Class Vocabulary được sử dụng để ghi lại các từ, được sử dụng để chuyển đổi văn bản thành số và ngược lại.
+# Class vocabulary được sử dụng để ghi lại các từ, được sử dụng để chuyển đổi văn bản thành số và ngược lại.
 class Vocab:
     def __init__(self):
         self.word2id = dict()

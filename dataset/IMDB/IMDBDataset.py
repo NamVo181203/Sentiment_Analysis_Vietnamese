@@ -1,7 +1,7 @@
 import pandas as pd
 import torch
 from torch.utils.data import Dataset
-from Vocabulary import vocabulary
+from vocabulary import vocabulary
 
 # from scipy.linalg.special_matrices import dft
 
@@ -10,7 +10,7 @@ class IMDBDataset(Dataset):
     # Load dataset từ file csv
     def __init__(self, vocab, csv_fpath=None, tokenized_fpath=None):
         """
-        @param vocab (Vocabulary)
+        @param vocab (vocabulary)
         @param csv_fpath (str)
         @param tokenized_fpath (str)
         """
