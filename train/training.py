@@ -123,6 +123,9 @@ criterion = nn.BCEWithLogitsLoss().to(device)
 model = model.to(device)
 
 best_valid_loss = float("inf")
+
+out_file = open("../log/training/model_RNN.log", 'w')
+
 # Training model
 list_train_loss = []
 list_train_acc = []
@@ -151,12 +154,10 @@ for epoch in range(N_EPOCHS):
         best_valid_loss = valid_loss
         torch.save(model.state_dict(), "../save_model/model_RNN.pth")
 
-    print(f"Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s")
-    print(f"\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}")
-    print(f"\tValidation Loss: {valid_loss:.3f} | Validation Acc: {valid_acc * 100:.2f}")
+    print(f"Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s"
+          f"\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}"
+          f"\tValidation Loss: {valid_loss:.3f} | Validation Acc: {valid_acc * 100:.2f}", file=out_file)
 
-
-out_file = open("../log/training/model_RNN.log", 'w')
 
 print("End Training, Train Acc: %.4f, Train Loss: %4.f, Valid Acc: %.4f, Valid Loss: %.4f",
       max(list_train_acc), min(list_train_loss), max(list_val_acc), min(list_val_loss), file=out_file)
