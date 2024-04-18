@@ -120,5 +120,5 @@ if __name__ == "__main__":
     corpus = vocab.tensor_to_corpus(corpus_tensor)
 
     # print(f"Tokenize: {token_corpus}")
-    # print(f"Tensor: {corpus_tensor}")
-    print(f"""Corpus: {" ".join(corpus[0])}""")
+    print(f"Tensor: {corpus_tensor}")
+    # print(f"""Corpus: {" ".join(corpus[0])}""")

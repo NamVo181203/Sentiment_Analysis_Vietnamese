@@ -25,7 +25,7 @@ def binary_accuracy(preds, y):
     return acc
 
 
-def train(model, dataloader, optimizer, criterion, device):
+def run_epoch(model, dataloader, criterion, device, optimizer=None, is_training=True):
     """
     :param model: RNN/Transformer
     :param dataloader: DataLoader
@@ -36,58 +36,34 @@ def train(model, dataloader, optimizer, criterion, device):
     :return: epoch_acc(float): accuracy của model trên mỗi epoch
     """
 
+    if is_training:
+        model.train()
+    else:
+        model.eval()
+
     epoch_loss = 0
     epoch_acc = 0
 
-    model.train()
-
     for batch in dataloader:
-        optimizer.zero_grad()
         reviews, reviews_length = batch["reviews"]
         reviews = reviews.to(device)
+        reviews_length = reviews_length.to(device)
 
-        predictions = model(reviews, reviews_length).squeeze(1)
+        input = (reviews, reviews_length)
+
+        predictions = model(input).squeeze(1)
         sentiments = batch["sentiments"].to(device)
+
         loss = criterion(predictions, sentiments)
         acc = binary_accuracy(predictions, sentiments)
-
-        loss.backward()
-        optimizer.step()
 
         epoch_loss += loss.item()
         epoch_acc += acc.item()
 
-    batch_num = len(dataloader)
-
-    return epoch_loss / batch_num, epoch_acc / batch_num
-
-
-def evaluate(model, dataloader, criterion, device):
-    """
-    :param model: RNN/Transformer
-    :param dataloader: DataLoader
-    :param criterion: BCEWithLogitsLoss
-    :param device: GPU/CPU
-    :return: epoch_loss(float): loss của model trên mỗi epoch
-    :return: epoch_acc(float): accuracy của model trên mỗi epoch
-    """
-    epoch_loss = 0
-    epoch_acc = 0
-
-    model.eval()
-
-    with torch.no_grad():
-        for batch in dataloader:
-            reviews, reviews_length = batch["reviews"]
-            reviews = reviews.to(device)
-
-            predictions = model(reviews, reviews_length).squeeze(1)
-            sentiments = batch["sentiments"].to(device)
-            loss = criterion(predictions, sentiments)
-            acc = binary_accuracy(predictions, sentiments)
-
-            epoch_loss += loss.item()
-            epoch_acc += acc.item()
+        if is_training:
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
     batch_num = len(dataloader)
 
@@ -147,22 +123,42 @@ criterion = nn.BCEWithLogitsLoss().to(device)
 model = model.to(device)
 
 best_valid_loss = float("inf")
-
 # Training model
+list_train_loss = []
+list_train_acc = []
+list_val_loss = []
+list_val_acc = []
 for epoch in range(N_EPOCHS):
     start_time = time.time()
+    train_loss, train_acc = run_epoch(model=model, dataloader=train_dataloader,
+                                      device=device,criterion=criterion,
+                                      optimizer=optimizer, is_training=True)
 
-    train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
-    valid_loss, valid_acc = evaluate(model, val_dataloader, criterion, device)
+    list_train_loss.append(train_loss)
+    list_train_acc.append(train_acc)
+
+    valid_loss, valid_acc = run_epoch(model=model, dataloader=val_dataloader,
+                                      device=device,criterion=criterion,
+                                      optimizer=None, is_training=False)
+
+    list_val_loss.append(valid_loss)
+    list_val_acc.append(valid_acc)
 
     end_time = time.time()
-
     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), "model_RNN.pt")
+        torch.save(model.state_dict(), "../save_model/model_RNN.pth")
 
     print(f"Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s")
     print(f"\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}")
     print(f"\tValidation Loss: {valid_loss:.3f} | Validation Acc: {valid_acc * 100:.2f}")
+
+
+out_file = open("../log/training/model_RNN.log", 'w')
+
+print("End Training, Train Acc: %.4f, Train Loss: %4.f, Valid Acc: %.4f, Valid Loss: %.4f",
+      max(list_train_acc), min(list_train_loss), max(list_val_acc), min(list_val_loss), file=out_file)
+print("End Training, Train Acc: %.4f, Train Loss: %4.f, Valid Acc: %.4f, Valid Loss: %.4f",
+      max(list_train_acc), min(list_train_loss), max(list_val_acc), min(list_val_loss))

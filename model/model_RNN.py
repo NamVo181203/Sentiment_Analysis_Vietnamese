@@ -28,12 +28,13 @@ class RNN(nn.Module):
 
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, text, text_lengths):
+    def forward(self, x):
         """
         :param text: shape[sent len, batch size]
         :param text_lengths: shape[batch size]
         :return:
         """
+        (text, text_lengths) = x
         # text = [sent len, batch size]
         embedded = self.dropout(self.embedding(text))
         # embedded = [sent len, batch size, emb dim]
