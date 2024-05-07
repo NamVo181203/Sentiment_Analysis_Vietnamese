@@ -69,4 +69,4 @@ if __name__ == "__main__":
 
     # Run để tạo dataset và lưu vào file tokenized.pt -> Mất khoảng 15p
     # dataset = IMDBDataset(vocab, "../VI_IMDB.csv")
-    # torch.save(dataset.tokenized_reviews, "tokenized.pt")
+    # torch.save(dataset.tokenized_reviews, "../data/tokenized.pt")

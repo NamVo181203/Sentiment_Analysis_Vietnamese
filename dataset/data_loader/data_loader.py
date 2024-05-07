@@ -35,4 +35,6 @@ if __name__ == "__main__":
     vocab = Vocab()
     vocab.run_add_vocab(word_embedding)
 
-    train_data, val_data, test_datar = data_loader(vocab, IMDBDataset, 100)
+    BATCH_SIZE = 100
+
+    train_data, val_data, test_datar = data_loader(vocab, IMDBDataset, BATCH_SIZE)
