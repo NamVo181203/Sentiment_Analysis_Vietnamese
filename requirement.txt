@@ -1,3 +1,5 @@
 underthesea
 torch
 torchtext
+streamlit
+st-page
