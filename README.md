@@ -1,5 +1,5 @@
 # Phân tích cảm xúc trong tiếng Việt - Sentiment Analysis Vietnamese
-## Rresponsible Person: NVoz aka Võ Văn Nam
+## Responsible Person: NVoz aka Võ Văn Nam
 
 ### Init venv
 ```python
