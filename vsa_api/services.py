@@ -6,8 +6,8 @@ from vocabulary.vocabulary import Vocab
 
 def sent_analysis_service(sentence):
     word_embedding = torch.load("./dataset/data/vi_word2vec.pt")
-    vocab = Vocab()
-    vocab.run_add_vocab(word_embedding)
+    vocabulary = Vocab()
+    vocabulary.run_add_vocab(word_embedding)
 
     file_model = "./save_model/model_RNN.pth"
 
@@ -42,6 +42,6 @@ def sent_analysis_service(sentence):
 
         return prediction.item()
 
-    pred = predict_sentiment(RNN, file_model, sentence, vocab)
+    pred = predict_sentiment(RNN, file_model, sentence, vocabulary)
 
     return pred

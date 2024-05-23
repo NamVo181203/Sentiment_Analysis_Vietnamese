@@ -1,8 +1,21 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Members of Team"
-)
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("https://i.postimg.cc/1RVtj3Ym/image.jpg");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: local;
+}}
+[data-testid="stSidebar"] {{
+background-color: #35373B;
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 st.write("""
 # :adult: Thành viên
@@ -34,7 +47,7 @@ with col2:
     - Ngành: Công Nghệ Thông Tin
     """)
 
-st.write("""
+st.markdown("""
 ### Github: [Github Of Application](https://github.com/NamVo181203/Sentiment_Analysis_Vietnamese)
 
 ### Driver: [Driver Of Model](https://drive.google.com/drive/folders/1-KxZ3F_8OGifimZXUuQkeL7ZDSyUnvN5?usp=sharing)

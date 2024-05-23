@@ -1,9 +1,23 @@
+import pandas as pd
 import streamlit as st
 from vsa_api.services import sent_analysis_service
 
-st.set_page_config(
-        page_title="Vietnamese Sentiment Analysis"
-)
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("https://i.postimg.cc/1RVtj3Ym/image.jpg");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: local;
+}}
+[data-testid="stSidebar"] {{
+background-color: #35373B;
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 st.markdown(
     """
@@ -39,17 +53,26 @@ if option:
 
 sentence = st.text_input("Bình luận về trailer:", placeholder="Phim khiến cho tôi cảm thấy...")
 
-
 if st.button("Đánh giá", use_container_width=True):
     if not option:
         st.warning("Vui lòng xem trailer trước khi đánh giá!")
     else:
         if sentence:
-            with st.spinner('Wait for it...'):
+            with st.spinner('Đợi trong giây lát để nhận được phản hồi...'):
                 evaluate = sent_analysis_service(sentence)
                 if evaluate > 0.5:
                     st.success("Cảm ơn những đánh giá tích cực bạn!")
+                    header = ['review', 'sentiment']
+                    data = [[str(sentence), "positive"]]
+                    data = pd.DataFrame(data, columns=header)
+                    data.to_csv("./dataset/data/comment_evaluate.csv",
+                                index=False)
                 else:
                     st.success("Xin lỗi bạn vì chất lượng của bộ phim! Chúng tôi sẽ **khắc phục** trong tương lai")
+                    header = ['review', 'sentiment']
+                    data = [[str(sentence), "negative"]]
+                    data = pd.DataFrame(data, columns=header)
+                    data.to_csv("./dataset/data/comment_evaluate.csv",
+                                index=False)
         else:
             st.warning("Vui lòng nhập bình luận!")

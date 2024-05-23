@@ -1,6 +1,23 @@
 from st_pages import Page, show_pages
 import streamlit as st
 
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("https://i.postimg.cc/1RVtj3Ym/image.jpg");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: local;
+}}
+[data-testid="stSidebar"] {{
+background-color: #35373B;
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # Specify what pages should be shown in the sidebar, and what their titles
 # and icons should be
 show_pages(
@@ -8,6 +25,7 @@ show_pages(
         Page("../Sentiment_Analysis_Vietnamese/vsa_api/main.py", "Introduction", ":brain:"),
         Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/members.py", "Member", ":adult:"),
         Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/app.py", "Application", ":video_game:"),
+        Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/evaluate_model.py", "Evaluate Model", ":scales:"),
     ]
 )
 
@@ -22,5 +40,4 @@ Hiện tại thì cộng đồng khoa học mới chỉ giải quyết tốt bà
 - Phương pháp thủ công (dò từ khóa): việc dự đoán cảm xúc dựa vào việc tìm kiếm các từ cảm xúc riêng lẻ, xác định điểm số cho các từ tích cực, xác định điểm số cho các từ tiêu cực và sau đó là tổng hợp các điểm số này lại theo một độ đo xác định để quyết định xem văn bản mang màu sắc cảm xúc gì. Điểm hạn chế của phương pháp này là quan tâm đến thứ tự các từ và sẽ bỏ qua các từ quan trọng. Độ chính xác của mô hình phụ thuộc vào độ tốt của bộ từ điển các từ cảm xúc.Ưu điểm của phương pháp này là dễ thực hiện, tính toán nhanh, chỉ tốn công sức cho việc xây dựng bộ từ điển dữ liệu của các từ cảm xúc thôi.
 - Phương pháp Deep Learning Neural Network: phương pháp phân tích nhận diện cảm xúc đã được giải quyết bằng mô hình học Recurrent Neural Network với một phương pháp được dùng phổ biến hiện nay là Long Short Term Memory Neural Network (LSTMs), kết hợp với phương pháp mô hình vector hóa từ Word2Vector với kiến trúc được sử dụng là Continuous Bag- of-Words (CBOW).
 - Phương pháp kết hợp rule-based và corpus-based: Phương pháp này kết hợp sử dụng mô hình Deep Learning Recursive Neural Network với hệ tri thức chuyên gia được sử dụng trong xử lý ngôn ngữ tự nhiên được gọi là Sentiment Treebank. Sentiment Tree là một mô hình cây phân tích cú pháp của một câu văn, trong đó ở mỗi nút trong cây được kèm theo bộ trọng số cảm xúc lần lượt là: rất tiêu cực, tiêu cực, trung tính, tích cực và rất tích cực.
-
 """)

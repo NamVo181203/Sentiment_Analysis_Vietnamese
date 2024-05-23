@@ -35,9 +35,10 @@ word_embedding = torch.load("../dataset/data/vi_word2vec.pt")
 end = time.time()
 
 # Location: 0-words, 1-words:index, 2-Tensor
-print(len(word_embedding[0]))
-print(len(word_embedding[1]))
-print(word_embedding[2].shape)
+# print(len(word_embedding[0]))
+# print(len(word_embedding[1]))
+# print(word_embedding[2].shape)
+print(word_embedding)
 print(f"Time running: {end - start}")
 # word2vec = get_vector(word_embedding, "Việt_Nam")
 # print("Running...")
