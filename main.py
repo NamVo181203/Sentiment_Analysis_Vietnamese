@@ -23,9 +23,9 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 show_pages(
     [
         Page("../Sentiment_Analysis_Vietnamese/vsa_api/main.py", "Introduction", ":brain:"),
-        Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/members.py", "Member", ":adult:"),
-        Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/app.py", "Application", ":video_game:"),
-        Page("../Sentiment_Analysis_Vietnamese/vsa_api/pages/evaluate_model.py", "Evaluate Model", ":scales:"),
+        Page("pages/members.py", "Member", ":adult:"),
+        Page("pages/app.py", "Application", ":video_game:"),
+        Page("pages/evaluate_model.py", "Evaluate Model", ":scales:"),
     ]
 )
 

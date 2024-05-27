@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from vsa_api.services import sent_analysis_service
+from services import sent_analysis_service
 
 page_bg_img = f"""
 <style>
