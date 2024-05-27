@@ -1,6 +1,13 @@
 import pandas as pd
 import streamlit as st
 from services import sent_analysis_service
+from supabase import create_client, Client
+
+# init DB
+url: str = "https://yyciwuqbkcqecbrqholh.supabase.co"
+key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Y2l3dXFia2NxZWNicnFob2xoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNjI5NTEwNSwiZXhwIjoyMDMxODcxMTA1fQ.5mRyn4e7g1PKBnh2N6g10ISkp7CvQnX2owbWQLe9lnQ"
+DB: Client = create_client(supabase_url=url, supabase_key=key)
+
 
 page_bg_img = f"""
 <style>
