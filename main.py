@@ -22,7 +22,7 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 # and icons should be
 show_pages(
     [
-        Page("../Sentiment_Analysis_Vietnamese/vsa_api/main.py", "Introduction", ":brain:"),
+        Page("main.py", "Introduction", ":brain:"),
         Page("pages/members.py", "Member", ":adult:"),
         Page("pages/app.py", "Application", ":video_game:"),
         Page("pages/evaluate_model.py", "Evaluate Model", ":scales:"),
