@@ -20,13 +20,13 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 st.write("""
 # :adult: Thành viên
 
-### Nhóm gồm hai thành viên:
+### Nhóm gồm các thành viên:
 """)
 
-col1, col2 = st.columns([1, 1])
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
 with col1:
-    st.image("images/Nam.jpg", caption="Võ Văn Nam - 21IT683")
+    st.image("images/Nam.jpg", caption="Võ Văn Nam")
     st.write("""
     - Vai trò: Leader
     - Họ tên: Võ Văn Nam
@@ -37,11 +37,33 @@ with col1:
     """)
 
 with col2:
-    st.image("images/Duc1.jpg", caption="Huỳnh Trọng Đức - 21IT129")
+    st.image("images/Duc1.jpg", caption="Huỳnh Trọng Đức")
     st.write("""
     - Vai trò: Member
     - Họ tên: Huỳnh Trọng Đức
     - Mã sinh viên: 21IT129
+    - Lớp sinh hoạt: 21SE3
+    - Khoa: Khoa Học Máy Tính
+    - Ngành: Công Nghệ Thông Tin
+    """)
+
+with col3:
+    st.image("images/Duc1.jpg", caption="Nguyễn Viết Huy")
+    st.write("""
+    - Vai trò: Member
+    - Họ tên: Nguyễn Viết Huy
+    - Mã sinh viên: 21IT684
+    - Lớp sinh hoạt: 21SE3
+    - Khoa: Khoa Học Máy Tính
+    - Ngành: Công Nghệ Thông Tin
+    """)
+
+with col4:
+    st.image("images/Duc1.jpg", caption="Ngô Nguyễn Viết Lĩnh")
+    st.write("""
+    - Vai trò: Member
+    - Họ tên: Ngô Nguyễn Viết Lĩnh
+    - Mã sinh viên: 21IT150
     - Lớp sinh hoạt: 21SE3
     - Khoa: Khoa Học Máy Tính
     - Ngành: Công Nghệ Thông Tin
