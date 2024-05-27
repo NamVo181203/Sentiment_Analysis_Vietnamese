@@ -26,17 +26,6 @@ st.write("""
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    st.image("images/Duc1.jpg", caption="Huỳnh Trọng Đức - 21IT129")
-    st.write("""
-    - Vai trò: Member
-    - Họ tên: Huỳnh Trọng Đức
-    - Mã sinh viên: 21IT129
-    - Lớp sinh hoạt: 21SE3
-    - Khoa: Khoa Học Máy Tính
-    - Ngành: Công Nghệ Thông Tin
-    """)
-
-with col2:
     st.image("images/Nam.jpg", caption="Võ Văn Nam - 21IT683")
     st.write("""
     - Vai trò: Leader
@@ -47,8 +36,21 @@ with col2:
     - Ngành: Công Nghệ Thông Tin
     """)
 
+with col2:
+    st.image("images/Duc1.jpg", caption="Huỳnh Trọng Đức - 21IT129")
+    st.write("""
+    - Vai trò: Member
+    - Họ tên: Huỳnh Trọng Đức
+    - Mã sinh viên: 21IT129
+    - Lớp sinh hoạt: 21SE3
+    - Khoa: Khoa Học Máy Tính
+    - Ngành: Công Nghệ Thông Tin
+    """)
+
 st.markdown("""
 ### Github: [Github Of Application](https://github.com/NamVo181203/Sentiment_Analysis_Vietnamese)
 
 ### Driver: [Driver Of Model](https://drive.google.com/drive/folders/1-KxZ3F_8OGifimZXUuQkeL7ZDSyUnvN5?usp=sharing)
+
+### Website: [Website Of Team](https://sentiment-analysis-vietnamese.streamlit.app)
 """)
