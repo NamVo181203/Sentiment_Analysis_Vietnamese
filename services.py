@@ -5,11 +5,11 @@ from vocabulary.vocabulary import Vocab
 
 
 def sent_analysis_service(sentence):
-    word_embedding = torch.load("./dataset/data/vi_word2vec.pt")
+    word_embedding = torch.load("dataset/data/vi_word2vec.pt")
     vocabulary = Vocab()
     vocabulary.run_add_vocab(word_embedding)
 
-    file_model = "./save_model/model_RNN.pth"
+    file_model = "save_model/model_RNN.pth"
 
     def predict_sentiment(Model, path_model, sentence, vocab):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
