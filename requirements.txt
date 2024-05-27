@@ -1,5 +1,12 @@
-underthesea
-torch
-torchtext
-streamlit
+underthesea~=6.8.0
+torch~=2.2.2
+torchtext~=0.17.2
+streamlit~=1.30.0
 st-pages
+
+transformers~=4.38.1
+pandas~=2.1.4
+tqdm~=4.65.0
+numpy~=1.25.2
+scipy~=1.13.0
+supabase~=2.4.1
