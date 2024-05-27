@@ -44,6 +44,7 @@ def main():
     - Phương pháp kết hợp rule-based và corpus-based: Phương pháp này kết hợp sử dụng mô hình Deep Learning Recursive Neural Network với hệ tri thức chuyên gia được sử dụng trong xử lý ngôn ngữ tự nhiên được gọi là Sentiment Treebank. Sentiment Tree là một mô hình cây phân tích cú pháp của một câu văn, trong đó ở mỗi nút trong cây được kèm theo bộ trọng số cảm xúc lần lượt là: rất tiêu cực, tiêu cực, trung tính, tích cực và rất tích cực.
     """)
 
+
 if __name__ == "__main__":
-    st.set_page_config(page_title="Collect Data", layout="wide")
+    st.set_page_config(page_title="Đánh giá phim", layout="wide")
     main()
