@@ -52,11 +52,10 @@ def sent_analysis_service(sentence):
 
 
 @app.post("/predict_sentiment")
-async def predict_sentiment(sentence: Request):
-
-    assert sentence is None, "Không có sentence để dự đoán!"
-
-    sentiment = predict_sentiment(sentence)
+async def predict_sentiment(request: Request):
+    data = await request.json()
+    sentence = data['text']
+    sentiment = sent_analysis_service(sentence)
 
     responses = {
         'sentiment': sentiment

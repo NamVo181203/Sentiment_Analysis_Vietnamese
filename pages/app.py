@@ -3,15 +3,15 @@ import requests
 from supabase import create_client, Client
 
 # init DB
-url: str = "https://yyciwuqbkcqecbrqholh.supabase.co"
-key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Y2l3dXFia2NxZWNicnFob2xoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNjI5NTEwNSwiZXhwIjoyMDMxODcxMTA1fQ.5mRyn4e7g1PKBnh2N6g10ISkp7CvQnX2owbWQLe9lnQ"
+url: str = "https://gbvvdcnaevbzetbrvmdc.supabase.co"
+key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdidnZkY25hZXZiemV0YnJ2bWRjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNjc5MjAzMCwiZXhwIjoyMDMyMzY4MDMwfQ.j9CIUk_VOWL0lLf8WJuyGY4C5l0qjhmmru53nSONXG8"
 DB: Client = create_client(supabase_url=url, supabase_key=key)
 
 
 # Goi API
 def get_sentiment(text):
     url = 'http://127.0.0.1:8000/predict_sentiment'  # Địa chỉ API của bạn
-    response = requests.post(url, json={'sentence': text})
+    response = requests.post(url, json={'text': text})
     if response.status_code == 200:
         return response.json()['sentiment']
     else:
@@ -76,17 +76,20 @@ if st.button("Đánh giá", use_container_width=True):
         if sentence:
             with st.spinner('Đợi trong giây lát để nhận được phản hồi...'):
                 sentiment = get_sentiment(sentence)
+                print(f"Sentiment: {sentiment}")
                 if sentiment > 0.5:
-                    insert_data = {"film_url": option, "predicted": "positive"}
-                    # Insert vào bảng
-                    response = DB.table("comment").insert(insert_data).execute()
-                    print(f"DB: {response}")
                     st.success("Cảm ơn những đánh giá tích cực bạn!")
-                else:
-                    insert_data = {"film_url": option, "predicted": "negative"}
+                    insert_data = {"film_url": option, "predict": "positive"}
                     # Insert vào bảng
                     response = DB.table("comment").insert(insert_data).execute()
                     print(f"DB: {response}")
+
+                else:
                     st.success("Xin lỗi bạn vì chất lượng của bộ phim! Chúng tôi sẽ **khắc phục** trong tương lai")
+                    insert_data = {"film_url": option, "predict": "negative"}
+                    # Insert vào bảng
+                    response = DB.table("comment").insert(insert_data).execute()
+                    print(f"DB: {response}")
+
         else:
             st.warning("Vui lòng nhập bình luận!")
