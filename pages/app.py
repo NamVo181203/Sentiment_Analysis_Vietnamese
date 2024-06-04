@@ -1,12 +1,21 @@
-import pandas as pd
 import streamlit as st
-from services import sent_analysis_service
+import requests
 from supabase import create_client, Client
 
 # init DB
 url: str = "https://yyciwuqbkcqecbrqholh.supabase.co"
 key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Y2l3dXFia2NxZWNicnFob2xoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNjI5NTEwNSwiZXhwIjoyMDMxODcxMTA1fQ.5mRyn4e7g1PKBnh2N6g10ISkp7CvQnX2owbWQLe9lnQ"
 DB: Client = create_client(supabase_url=url, supabase_key=key)
+
+
+# Goi API
+def get_sentiment(text):
+    url = 'http://127.0.0.1:8000/predict_sentiment'  # Địa chỉ API của bạn
+    response = requests.post(url, json={'sentence': text})
+    if response.status_code == 200:
+        return response.json()['sentiment']
+    else:
+        return 'Error'
 
 
 page_bg_img = f"""
@@ -66,20 +75,18 @@ if st.button("Đánh giá", use_container_width=True):
     else:
         if sentence:
             with st.spinner('Đợi trong giây lát để nhận được phản hồi...'):
-                evaluate = sent_analysis_service(sentence)
-                if evaluate > 0.5:
+                sentiment = get_sentiment(sentence)
+                if sentiment > 0.5:
+                    insert_data = {"film_url": option, "predicted": "positive"}
+                    # Insert vào bảng
+                    response = DB.table("comment").insert(insert_data).execute()
+                    print(f"DB: {response}")
                     st.success("Cảm ơn những đánh giá tích cực bạn!")
-                    header = ['review', 'sentiment']
-                    data = [[str(sentence), "positive"]]
-                    data = pd.DataFrame(data, columns=header)
-                    data.to_csv("./dataset/data/comment_evaluate.csv",
-                                index=False)
                 else:
+                    insert_data = {"film_url": option, "predicted": "negative"}
+                    # Insert vào bảng
+                    response = DB.table("comment").insert(insert_data).execute()
+                    print(f"DB: {response}")
                     st.success("Xin lỗi bạn vì chất lượng của bộ phim! Chúng tôi sẽ **khắc phục** trong tương lai")
-                    header = ['review', 'sentiment']
-                    data = [[str(sentence), "negative"]]
-                    data = pd.DataFrame(data, columns=header)
-                    data.to_csv("./dataset/data/comment_evaluate.csv",
-                                index=False)
         else:
             st.warning("Vui lòng nhập bình luận!")

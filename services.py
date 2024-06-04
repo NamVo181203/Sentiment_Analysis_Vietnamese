@@ -1,15 +1,19 @@
 import torch
+import uvicorn
+from fastapi import FastAPI, Request
 
 from model.model_RNN import RNN
 from vocabulary.vocabulary import Vocab
 
+app = FastAPI()
+
 
 def sent_analysis_service(sentence):
-    word_embedding = torch.load("dataset/data/vi_word2vec.pt")
+    word_embedding = torch.load("./dataset/data/vi_word2vec.pt")
     vocabulary = Vocab()
     vocabulary.run_add_vocab(word_embedding)
 
-    file_model = "save_model/model_RNN.pth"
+    file_model = "./save_model/model_RNN.pth"
 
     def predict_sentiment(Model, path_model, sentence, vocab):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -45,3 +49,20 @@ def sent_analysis_service(sentence):
     pred = predict_sentiment(RNN, file_model, sentence, vocabulary)
 
     return pred
+
+
+@app.post("/predict_sentiment")
+async def predict_sentiment(sentence: Request):
+
+    assert sentence is None, "Không có sentence để dự đoán!"
+
+    sentiment = predict_sentiment(sentence)
+
+    responses = {
+        'sentiment': sentiment
+    }
+
+    return responses
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)

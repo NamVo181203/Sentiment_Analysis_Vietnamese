@@ -37,7 +37,7 @@ with col1:
     """)
 
 with col2:
-    st.image("images/Duc1.jpg", caption="Huỳnh Trọng Đức")
+    st.image("images/Duc.jpg", caption="Huỳnh Trọng Đức")
     st.write("""
     - Vai trò: Member
     - Họ tên: Huỳnh Trọng Đức
@@ -48,7 +48,7 @@ with col2:
     """)
 
 with col3:
-    st.image("images/Duc1.jpg", caption="Nguyễn Viết Huy")
+    st.image("images/Huy.jpg", caption="Nguyễn Viết Huy")
     st.write("""
     - Vai trò: Member
     - Họ tên: Nguyễn Viết Huy
@@ -59,7 +59,7 @@ with col3:
     """)
 
 with col4:
-    st.image("images/Duc1.jpg", caption="Ngô Nguyễn Viết Lĩnh")
+    st.image("images/Linh.jpg", caption="Ngô Nguyễn Viết Lĩnh")
     st.write("""
     - Vai trò: Member
     - Họ tên: Ngô Nguyễn Viết Lĩnh

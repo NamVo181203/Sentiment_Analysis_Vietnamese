@@ -25,5 +25,5 @@ pip install -r requirements.txt
 
 ### Run streamlit in cmd
 ```python
-python -m streamlit run .\vsa_api\main.py
+python -m streamlit run .\main.py
 ```
