@@ -79,14 +79,14 @@ if st.button("Đánh giá", use_container_width=True):
                 print(f"Sentiment: {sentiment}")
                 if sentiment > 0.5:
                     st.success("Cảm ơn những đánh giá tích cực bạn!")
-                    insert_data = {"film_url": option, "predict": "positive"}
+                    insert_data = {"film_url": dict_film[option], "predict": "positive"}
                     # Insert vào bảng
                     response = DB.table("comment").insert(insert_data).execute()
                     print(f"DB: {response}")
 
                 else:
                     st.success("Xin lỗi bạn vì chất lượng của bộ phim! Chúng tôi sẽ **khắc phục** trong tương lai")
-                    insert_data = {"film_url": option, "predict": "negative"}
+                    insert_data = {"film_url": dict_film[option], "predict": "negative"}
                     # Insert vào bảng
                     response = DB.table("comment").insert(insert_data).execute()
                     print(f"DB: {response}")
