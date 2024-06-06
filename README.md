@@ -23,7 +23,12 @@ Website: [Website Of Team](https://sentiment-analysis-vietnamese.streamlit.app)
 pip install -r requirements.txt
 ```
 
-### Run streamlit in cmd
+### Run in terminal
+- Chạy API
+```pthon
+uvicorn services:app --reload
+```
+- Chạy UI
 ```python
 python -m streamlit run .\main.py
 ```
