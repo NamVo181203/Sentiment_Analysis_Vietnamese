@@ -27,6 +27,7 @@ def binary_accuracy(preds, y):
 
 def run_epoch(model, dataloader, criterion, device, optimizer=None, is_training=True):
     """
+    :param is_training: Có training hay không
     :param model: RNN/Transformer
     :param dataloader: DataLoader
     :param optimizer: Adam
@@ -126,7 +127,7 @@ best_valid_loss = float("inf")
 
 out_file = open("../log/training/model_RNN.log", 'w')
 
-# Training model
+# TRAINING MODEL #
 list_train_loss = []
 list_train_acc = []
 list_val_loss = []

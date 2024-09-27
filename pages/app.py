@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from supabase import create_client, Client
 
-# init DB
+# init DB / Gọi API CSDL
 url: str = "https://gbvvdcnaevbzetbrvmdc.supabase.co"
 key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdidnZkY25hZXZiemV0YnJ2bWRjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNjc5MjAzMCwiZXhwIjoyMDMyMzY4MDMwfQ.j9CIUk_VOWL0lLf8WJuyGY4C5l0qjhmmru53nSONXG8"
 DB: Client = create_client(supabase_url=url, supabase_key=key)
@@ -10,7 +10,7 @@ DB: Client = create_client(supabase_url=url, supabase_key=key)
 
 # Goi API
 def get_sentiment(text):
-    url = 'http://127.0.0.1:8000/predict_sentiment'  # Địa chỉ API của bạn
+    url = 'http://127.0.0.1:8000/predict_sentiment'  # Gọi địa chỉ API của bạn
     response = requests.post(url, json={'text': text})
     if response.status_code == 200:
         return response.json()['sentiment']
@@ -80,7 +80,7 @@ if st.button("Đánh giá", use_container_width=True):
                 if sentiment > 0.5:
                     st.success("Cảm ơn những đánh giá tích cực bạn!")
                     insert_data = {"film_url": dict_film[option], "feedback": sentence, "predict": "positive"}
-                    # Insert vào bảng
+                    # Insert vào bảng trên cơ sở dữ liệu
                     response = DB.table("comment").insert(insert_data).execute()
                     print(f"DB: {response}")
 

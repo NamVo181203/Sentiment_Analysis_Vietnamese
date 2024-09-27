@@ -20,7 +20,7 @@ class IMDBDataset(Dataset):
         self.sentiments_list = list(df.sentiment)
         self.reviews_list = list(df.vi_review)
 
-        # Lưu nhãn cảm xúc trong dataset -> {'negative': 0, 'positive': 1}
+        # Lưu label cảm xúc trong dataset -> {'negative': 0, 'positive': 1}
         sentiment_type = list(set(self.sentiments_list))
         sentiment_type.sort()
 

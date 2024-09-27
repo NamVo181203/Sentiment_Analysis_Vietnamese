@@ -96,7 +96,7 @@ class Vocab:
 
     def run_add_vocab(self, embedding):
         word_list = list(embedding[0])
-        print(embedding[2].shape)
+        # print(embedding[2].shape)
         print("Adding vocab, Wait a minute!")
         for word in tqdm(word_list):
             self.add(word)
@@ -120,5 +120,5 @@ if __name__ == "__main__":
     corpus = vocab.tensor_to_corpus(corpus_tensor)
 
     # print(f"Tokenize: {token_corpus}")
-    print(f"Tensor: {corpus_tensor}")
-    # print(f"""Corpus: {" ".join(corpus[0])}""")
+    # print(f"Tensor: {corpus_tensor}")
+    print(f"""Corpus: {" ".join(corpus[0])}""")
